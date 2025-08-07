@@ -1,4 +1,4 @@
-name: Docker Compose CI/CD
+name: Docker Compose CI
 
 on:
   push:
@@ -11,25 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: 🛳️ Checkout repository
         uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
+      - name: 🔐 Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: uzimp
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build and tag Docker images
+      - name: 🛠️ Build and tag Docker images
         run: |
           docker compose -f docker-compose.yml build
 
-      - name: Tag & Push Backend image
+      - name: 📦 Tag & Push Backend image
         run: |
           docker tag todo101-todo-backend uzimp/todo-backend:latest
           docker push uzimp/todo-backend:latest
 
-      - name: Tag & Push Frontend image
+      - name: 🖼️ Tag & Push Frontend image
         run: |
           docker tag todo101-todo-frontend uzimp/todo-frontend:latest
           docker push uzimp/todo-frontend:latest
