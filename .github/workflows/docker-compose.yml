@@ -15,19 +15,19 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build and tag Docker images
         run: |
           docker compose -f docker-compose.yml build
-        
+
       - name: Tag & Push Backend image
         run: |
-          docker tag todo101-todo-backend ${{ secrets.DOCKER_USERNAME }}/todo-backend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/todo-backend:latest
+          docker tag todo101-todo-backend ${{ secrets.DOCKER_HUB_USERNAME }}/todo-backend:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/todo-backend:latest
 
       - name: Tag & Push Frontend image
         run: |
-          docker tag todo101-todo-frontend ${{ secrets.DOCKER_USERNAME }}/todo-frontend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/todo-frontend:latest
+          docker tag todo101-todo-frontend ${{ secrets.DOCKER_HUB_USERNAME }}/todo-frontend:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/todo-frontend:latest
