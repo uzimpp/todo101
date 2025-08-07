@@ -35,7 +35,7 @@ app.delete("/tasks/:id", async (req, res) => {
   await Task.findByIdAndDelete(req.params.id);
   res.sendStatus(204);
 });
-// docker run -d -p 27017:27017 mongo
+
 const connectWithRetry = () => {
   console.log("Connecting to MongoDB...");
   mongoose
