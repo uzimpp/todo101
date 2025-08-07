@@ -1,0 +1,25 @@
+version: "1.0"
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /Users/uzimp/Documents/KU/isp/todo101:/data/db
+
+  todo-backend:
+    build: ./backend
+    ports:
+      - "15000:15000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/todos
+
+  todo-frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - todo-backend
